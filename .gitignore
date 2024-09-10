@@ -1,18 +1,35 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+import random
+import string
+import tkinter as tk
+from tkinter import messagebox
 
-# Other files and folders
-.settings/
+# Função para gerar a senha
+def gerar_senha():
+    comprimento = int(entrada_comprimento.get())
+    caracteres = string.ascii_letters + string.digits + string.punctuation
+    senha = ''.join(random.choice(caracteres) for i in range(comprimento))
+    entrada_senha.delete(0, tk.END)
+    entrada_senha.insert(0, senha)
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+# Configuração da janela principal
+janela = tk.Tk()
+janela.title("Gerador de Senhas")
+janela.geometry("400x200")
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Rótulos e campos de entrada
+rotulo_comprimento = tk.Label(janela, text="Comprimento da Senha:")
+rotulo_comprimento.pack(pady=5)
+entrada_comprimento = tk.Entry(janela)
+entrada_comprimento.pack(pady=5)
+
+rotulo_senha = tk.Label(janela, text="Senha Gerada:")
+rotulo_senha.pack(pady=5)
+entrada_senha = tk.Entry(janela)
+entrada_senha.pack(pady=5)
+
+# Botão para gerar a senha
+botao_gerar = tk.Button(janela, text="Gerar Senha", command=gerar_senha)
+botao_gerar.pack(pady=20)
+
+# Iniciar o loop da interface gráfica
+janela.mainloop()
